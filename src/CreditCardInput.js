@@ -101,17 +101,15 @@ export default class CreditCardInput extends Component {
   };
 
   _focus = field => {
-    // if (!field) return;
+    if (!field) return;
 
-    // const scrollResponder = this.refs.Form.getScrollResponder();
-    // const nodeHandle = ReactNative.findNodeHandle(this.refs[field]);
+    const nodeHandle = ReactNative.findNodeHandle(this.refs[field]);
 
-    // NativeModules.UIManager.measureLayoutRelativeToParent(nodeHandle,
-    //   e => { throw e; },
-    //   x => {
-    //     scrollResponder.scrollTo({ x: Math.max(x - PREVIOUS_FIELD_OFFSET, 0), animated: true });
-    //     this.refs[field].focus();
-    //   });
+    NativeModules.UIManager.measureLayoutRelativeToParent(nodeHandle,
+      e => { throw e; },
+      x => {
+        this.refs[field].focus();
+      });
   }
 
   _inputProps = field => {
@@ -165,7 +163,7 @@ export default class CreditCardInput extends Component {
         <View style={{ marginTop: 20, alignSelf: 'center', width: 300 }}>
           <CCInput {...this._inputProps("number")}
             keyboardType="number-pad"
-            containerStyle={[s.inputContainer, inputContainerStyle, { width: CARD_NUMBER_INPUT_WIDTH }]} />
+            containerStyle={[s.inputContainer, inputContainerStyle, { width: 300 }]} />
           <View style={{
             flexDirection: 'row', justifyContent: 'space-between', marginTop: 15 }}>
             <CCInput {...this._inputProps("expiry")}
