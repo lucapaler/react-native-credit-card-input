@@ -23,7 +23,7 @@ const s = StyleSheet.create({
     marginTop: 20,
   },
   inputContainer: {
-    marginLeft: 20,
+    // marginLeft: 20,
   },
   inputLabel: {
     fontWeight: "bold",
@@ -149,23 +149,25 @@ export default class CreditCardInput extends Component {
 
     return (
       <View style={s.container}>
-        <CreditCard focused={focused}
-          brand={type}
-          scale={cardScale}
-          fontFamily={cardFontFamily}
-          imageFront={cardImageFront}
-          imageBack={cardImageBack}
-          customIcons={cardBrandIcons}
-          name={requiresName ? name : " "}
-          number={number}
-          expiry={expiry}
-          cvc={cvc} />
+        <View style={{ alignSelf: 'center' }}>
+          <CreditCard focused={focused}
+            brand={type}
+            scale={cardScale}
+            fontFamily={cardFontFamily}
+            imageFront={cardImageFront}
+            imageBack={cardImageBack}
+            customIcons={cardBrandIcons}
+            name={requiresName ? name : " "}
+            number={number}
+            expiry={expiry}
+            cvc={cvc} />
+        </View>
         <View style={{ marginTop: 20, paddingHorizontal: 20 }}>
           <CCInput {...this._inputProps("number")}
             keyboardType="number-pad"
             containerStyle={[s.inputContainer, inputContainerStyle, { width: CARD_NUMBER_INPUT_WIDTH }]} />
           <View style={{
-            flexDirection: 'row', justifyContent: 'space-between', marginTop: 15 }}>
+            flexDirection: 'row', justifyContent: 'space-between', marginTop: 15, width: CARD_NUMBER_INPUT_WIDTH }}>
             <CCInput {...this._inputProps("expiry")}
               keyboardType="number-pad"
               containerStyle={[s.inputContainer, inputContainerStyle, { width: EXPIRY_INPUT_WIDTH }]} />
