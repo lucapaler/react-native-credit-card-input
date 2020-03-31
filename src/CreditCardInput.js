@@ -17,7 +17,7 @@ import { InjectedProps } from "./connectToState";
 
 const s = StyleSheet.create({
   container: {
-    alignItems: "center",
+    // alignItems: "center",
   },
   form: {
     marginTop: 20,
@@ -160,18 +160,20 @@ export default class CreditCardInput extends Component {
           number={number}
           expiry={expiry}
           cvc={cvc} />
-        <CCInput {...this._inputProps("number")}
-          keyboardType="number-pad"
-          containerStyle={[s.inputContainer, inputContainerStyle, { width: CARD_NUMBER_INPUT_WIDTH }]} />
-        <View style={{
-          flexDirection: 'row', justifyContent: 'space-between' }}>
-          <CCInput {...this._inputProps("expiry")}
+        <View style={{ marginTop: 20, paddingHorizontal: 20 }}>
+          <CCInput {...this._inputProps("number")}
             keyboardType="number-pad"
-            containerStyle={[s.inputContainer, inputContainerStyle, { width: EXPIRY_INPUT_WIDTH }]} />
-          { requiresCVC &&
-            <CCInput {...this._inputProps("cvc")}
+            containerStyle={[s.inputContainer, inputContainerStyle, { width: CARD_NUMBER_INPUT_WIDTH }]} />
+          <View style={{
+            flexDirection: 'row', justifyContent: 'space-between' }}>
+            <CCInput {...this._inputProps("expiry")}
               keyboardType="number-pad"
-              containerStyle={[s.inputContainer, inputContainerStyle, { width: CVC_INPUT_WIDTH }]} />}
+              containerStyle={[s.inputContainer, inputContainerStyle, { width: EXPIRY_INPUT_WIDTH }]} />
+            { requiresCVC &&
+              <CCInput {...this._inputProps("cvc")}
+                keyboardType="number-pad"
+                containerStyle={[s.inputContainer, inputContainerStyle, { width: CVC_INPUT_WIDTH }]} />}
+          </View>
         </View>
         { requiresName &&
           <CCInput {...this._inputProps("name")}
