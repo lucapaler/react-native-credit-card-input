@@ -164,7 +164,7 @@ export default class CreditCardInput extends Component {
           keyboardType="number-pad"
           containerStyle={[s.inputContainer, inputContainerStyle, { width: CARD_NUMBER_INPUT_WIDTH }]} />
         <View style={{
-          flexDirection: 'horizontal', justifyContent: 'space-between' }}>
+          flexDirection: 'row', justifyContent: 'space-between' }}>
           <CCInput {...this._inputProps("expiry")}
             keyboardType="number-pad"
             containerStyle={[s.inputContainer, inputContainerStyle, { width: EXPIRY_INPUT_WIDTH }]} />
