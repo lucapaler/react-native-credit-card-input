@@ -162,7 +162,7 @@ export default class CreditCardInput extends Component {
             expiry={expiry}
             cvc={cvc} />
         </View>
-        <View style={{ marginTop: 20, paddingHorizontal: 20, alignSelf: 'center', width: 300 }}>
+        <View style={{ marginTop: 20, alignSelf: 'center', width: 300 }}>
           <CCInput {...this._inputProps("number")}
             keyboardType="number-pad"
             containerStyle={[s.inputContainer, inputContainerStyle, { width: CARD_NUMBER_INPUT_WIDTH }]} />
