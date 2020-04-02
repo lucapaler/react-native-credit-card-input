@@ -7,6 +7,7 @@ import {
   Text,
   StyleSheet,
   Platform,
+  Dimensions,
 } from "react-native";
 
 import defaultIcons from "./Icons";
