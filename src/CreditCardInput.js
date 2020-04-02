@@ -41,6 +41,8 @@ const NAME_INPUT_WIDTH = CARD_NUMBER_INPUT_WIDTH;
 const PREVIOUS_FIELD_OFFSET = 40;
 const POSTAL_CODE_INPUT_WIDTH = 120;
 
+const { width } = Dimensions.get('window');
+
 /* eslint react/prop-types: 0 */ // https://github.com/yannickcr/eslint-plugin-react/issues/106
 export default class CreditCardInput extends Component {
   static propTypes = {
@@ -160,10 +162,10 @@ export default class CreditCardInput extends Component {
             expiry={expiry}
             cvc={cvc} />
         </View>
-        <View style={{ marginTop: 20, alignSelf: 'center', width: 300 }}>
+        <View style={{ marginTop: 20, alignSelf: 'center', width }}>
           <CCInput {...this._inputProps("number")}
             keyboardType="number-pad"
-            containerStyle={[s.inputContainer, inputContainerStyle, { width: 300 }]} />
+            containerStyle={[s.inputContainer, inputContainerStyle, { width }]} />
           <View style={{
             flexDirection: 'row', justifyContent: 'space-between', marginTop: 15 }}>
             <CCInput {...this._inputProps("expiry")}
