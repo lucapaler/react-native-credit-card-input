@@ -33,8 +33,6 @@ const s = StyleSheet.create({
   },
 });
 
-const CVC_INPUT_WIDTH = 70;
-const EXPIRY_INPUT_WIDTH = CVC_INPUT_WIDTH;
 const CARD_NUMBER_INPUT_WIDTH_OFFSET = 40;
 const CARD_NUMBER_INPUT_WIDTH = Dimensions.get("window").width - EXPIRY_INPUT_WIDTH - CARD_NUMBER_INPUT_WIDTH_OFFSET;
 const NAME_INPUT_WIDTH = CARD_NUMBER_INPUT_WIDTH;
@@ -42,6 +40,9 @@ const PREVIOUS_FIELD_OFFSET = 40;
 const POSTAL_CODE_INPUT_WIDTH = 120;
 
 const { width } = Dimensions.get('window');
+
+const CVC_INPUT_WIDTH = width / 2 - 30;
+const EXPIRY_INPUT_WIDTH = CVC_INPUT_WIDTH;
 
 /* eslint react/prop-types: 0 */ // https://github.com/yannickcr/eslint-plugin-react/issues/106
 export default class CreditCardInput extends Component {
@@ -165,10 +166,10 @@ export default class CreditCardInput extends Component {
         <View style={{ marginTop: 20, alignSelf: 'center', width: width - 40 }}>
           { requiresName &&
             <CCInput {...this._inputProps("name")}
-              containerStyle={[s.inputContainer, inputContainerStyle, { width: NAME_INPUT_WIDTH }]} /> }
+              containerStyle={[s.inputContainer, inputContainerStyle, { width: width - 40 }]} /> }
           <CCInput {...this._inputProps("number")}
             keyboardType="number-pad"
-            containerStyle={[s.inputContainer, inputContainerStyle, { width: width - 40 }]} />
+            containerStyle={[s.inputContainer, inputContainerStyle, { width: width - 40, marginTop: 15 }]} />
           <View style={{
             flexDirection: 'row', justifyContent: 'space-between', marginTop: 15 }}>
             <CCInput {...this._inputProps("expiry")}

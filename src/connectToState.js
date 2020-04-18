@@ -74,10 +74,10 @@ export default function connectToState(CreditCardInput) {
     _displayedFields = () => {
       const { requiresName, requiresCVC, requiresPostalCode } = this.props;
       return compact([
+        requiresName ? "name" : null,
         "number",
         "expiry",
-        requiresCVC ? "cvc" : null,
-        requiresName ? "name" : null,
+        requiresCVC ? "cvc" : null,        
         requiresPostalCode ? "postalCode" : null,
       ]);
     };

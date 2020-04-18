@@ -82,7 +82,7 @@ export default class CCInput extends Component {
     return (
       <TouchableOpacity onPress={this.focus}
         activeOpacity={0.99}>
-        <View style={[containerStyle]}>
+        <View style={[containerStyle, isFocused && { borderBottomColor: '#3478f6' }]}>
           { !!label && <Text style={[labelStyle]}>{label}</Text>}
           <TextInput ref="input"
             {...additionalInputProps}
@@ -95,13 +95,13 @@ export default class CCInput extends Component {
               ((validColor && status === "valid") ? { color: validColor } :
               (invalidColor && status === "invalid") ? { color: invalidColor } :
               {}),
-              isFocused && { borderColor: '#3478f6' },
             ]}
             underlineColorAndroid={"transparent"}
             placeholderTextColor={placeholderColor}
             placeholder={placeholder}
             value={value}
             onFocus={this._onFocus}
+            onBlur={() => this.setState({ isFocused: false })}
             onChangeText={this._onChange} />
         </View>
       </TouchableOpacity>
