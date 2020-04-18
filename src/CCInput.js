@@ -53,6 +53,10 @@ export default class CCInput extends Component {
     additionalInputProps: {},
   };
 
+  state = {
+    isFocused: false,
+  }
+
   componentWillReceiveProps = newProps => {
     const { status, value, onBecomeEmpty, onBecomeValid, field } = this.props;
     const { status: newStatus, value: newValue } = newProps;
@@ -63,7 +67,10 @@ export default class CCInput extends Component {
 
   focus = () => this.refs.input.focus();
 
-  _onFocus = () => this.props.onFocus(this.props.field);
+  _onFocus = () => {
+    this.setState({ isFocused: true });
+    this.props.onFocus(this.props.field);
+  }
   _onChange = value => this.props.onChange(this.props.field, value);
 
   render() {
@@ -87,6 +94,7 @@ export default class CCInput extends Component {
               ((validColor && status === "valid") ? { color: validColor } :
               (invalidColor && status === "invalid") ? { color: invalidColor } :
               {}),
+              isFocused && { borderColor: '#3478f6' },
             ]}
             underlineColorAndroid={"transparent"}
             placeholderTextColor={placeholderColor}
