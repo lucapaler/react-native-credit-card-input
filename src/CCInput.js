@@ -78,6 +78,7 @@ export default class CCInput extends Component {
             containerStyle, inputStyle, labelStyle,
             validColor, invalidColor, placeholderColor,
             additionalInputProps } = this.props;
+    const { isFocused } = this.state;
     return (
       <TouchableOpacity onPress={this.focus}
         activeOpacity={0.99}>
