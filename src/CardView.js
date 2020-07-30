@@ -13,9 +13,8 @@ import {
 import defaultIcons from "./Icons";
 import FlipCard from "react-native-flip-card";
 
-// const BASE_SIZE = { width: 300, height: 190 };
 const { width } = Dimensions.get('window');
-const BASE_SIZE = { width: width - 40, height: (190 * (width - 40)) / 300 };
+const BASE_SIZE = { width: width - 30, height: (190 * (width - 30)) / 300 };
 
 const s = StyleSheet.create({
   cardContainer: {},
@@ -121,14 +120,29 @@ export default class CardView extends Component {
     const isAmex = brand === "american-express";
     const shouldFlip = !isAmex && focused === "cvc";
 
-    const containerSize = { ...BASE_SIZE, height: BASE_SIZE.height * scale };
-    const transform = { transform: [
-      { scale },
-      { translateY: ((BASE_SIZE.height * (scale - 1) / 2)) },
-    ] };
+    const containerSize = { width: BASE_SIZE.width * scale, height: BASE_SIZE.height * scale };
+
+    let transform;
+    if (scale === 0.8) {
+      transform = {
+        transform: [
+          { scale },
+          // { translateY: ((BASE_SIZE.height * (scale - 1) / 2)) },
+          { translateY: -27.5 },
+          { translateX: -43 },
+        ]
+      };
+    } else {
+      transform = {
+        transform: [
+          { scale },
+          { translateY: ((BASE_SIZE.height * (scale - 1) / 2)) },
+        ]
+      };
+    }
 
     return (
-      <View style={[s.cardContainer, containerSize]}>
+      <View style={containerSize}>
         <FlipCard style={{ borderWidth: 0 }}
           flipHorizontal
           flipVertical={false}
@@ -136,33 +150,33 @@ export default class CardView extends Component {
           perspective={2000}
           clickable={false}
           flip={shouldFlip}>
-          <ImageBackground style={[BASE_SIZE, s.cardFace, transform]}
+          <ImageBackground style={[BASE_SIZE, transform]}
             source={imageFront}>
-              <Image style={[s.icon]}
-                source={Icons[brand]} />
-              <Text style={[s.baseText, { fontFamily }, s.number, !number && s.placeholder, focused === "number" && s.focused]}>
-                { !number ? placeholder.number : number }
+            <Image style={[s.icon]}
+              source={Icons[brand]} />
+            <Text style={[s.baseText, { fontFamily }, s.number, !number && s.placeholder, focused === "number" && s.focused]}>
+              {!number ? placeholder.number : number}
+            </Text>
+            <Text style={[s.baseText, { fontFamily }, s.name, !name && s.placeholder, focused === "name" && s.focused]}
+              numberOfLines={1}>
+              {!name ? placeholder.name : name.toUpperCase()}
+            </Text>
+            <Text style={[s.baseText, { fontFamily }, s.expiryLabel, s.placeholder, focused === "expiry" && s.focused]}>
+              MONTH/YEAR
               </Text>
-              <Text style={[s.baseText, { fontFamily }, s.name, !name && s.placeholder, focused === "name" && s.focused]}
-                numberOfLines={1}>
-                { !name ? placeholder.name : name.toUpperCase() }
-              </Text>
-              <Text style={[s.baseText, { fontFamily }, s.expiryLabel, s.placeholder, focused === "expiry" && s.focused]}>
-                MONTH/YEAR
-              </Text>
-              <Text style={[s.baseText, { fontFamily }, s.expiry, !expiry && s.placeholder, focused === "expiry" && s.focused]}>
-                { !expiry ? placeholder.expiry : expiry }
-              </Text>
-              { isAmex &&
-                  <Text style={[s.baseText, { fontFamily }, s.amexCVC, !cvc && s.placeholder, focused === "cvc" && s.focused]}>
-                    { !cvc ? placeholder.cvc : cvc }
-                  </Text> }
+            <Text style={[s.baseText, { fontFamily }, s.expiry, !expiry && s.placeholder, focused === "expiry" && s.focused]}>
+              {!expiry ? placeholder.expiry : expiry}
+            </Text>
+            {isAmex &&
+              <Text style={[s.baseText, { fontFamily }, s.amexCVC, !cvc && s.placeholder, focused === "cvc" && s.focused]}>
+                {!cvc ? placeholder.cvc : cvc}
+              </Text>}
           </ImageBackground>
-          <ImageBackground style={[BASE_SIZE, s.cardFace, transform]}
+          <ImageBackground style={[BASE_SIZE, transform]}
             source={imageBack}>
-              <Text style={[s.baseText, s.cvc, !cvc && s.placeholder, focused === "cvc" && s.focused]}>
-                { !cvc ? placeholder.cvc : cvc }
-              </Text>
+            <Text style={[s.baseText, s.cvc, !cvc && s.placeholder, focused === "cvc" && s.focused]}>
+              {!cvc ? placeholder.cvc : cvc}
+            </Text>
           </ImageBackground>
         </FlipCard>
       </View>
