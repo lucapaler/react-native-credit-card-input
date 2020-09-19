@@ -2,18 +2,18 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import {
   View,
-  ImageBackground,
-  Image,
   Text,
   StyleSheet,
   Platform,
   Dimensions,
 } from "react-native";
 
+import FastImage from "react-native-fast-image";
+
 import defaultIcons from "./Icons";
 import FlipCard from "react-native-flip-card";
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 const BASE_SIZE = { width: width - 30, height: (190 * (width - 30)) / 300 };
 
 const s = StyleSheet.create({
@@ -130,14 +130,14 @@ export default class CardView extends Component {
           // { translateY: ((BASE_SIZE.height * (scale - 1) / 2)) },
           { translateY: -27.5 },
           { translateX: -43 },
-        ]
+        ],
       };
     } else {
       transform = {
         transform: [
           { scale },
           { translateY: ((BASE_SIZE.height * (scale - 1) / 2)) },
-        ]
+        ],
       };
     }
 
@@ -150,9 +150,9 @@ export default class CardView extends Component {
           perspective={2000}
           clickable={false}
           flip={shouldFlip}>
-          <ImageBackground style={[BASE_SIZE, transform]}
+          <FastImage style={[BASE_SIZE, transform]}
             source={imageFront}>
-            <Image style={[s.icon]}
+            <FastImage style={[s.icon]}
               source={Icons[brand]} />
             <Text style={[s.baseText, { fontFamily }, s.number, !number && s.placeholder, focused === "number" && s.focused]}>
               {!number ? placeholder.number : number}
@@ -171,13 +171,13 @@ export default class CardView extends Component {
               <Text style={[s.baseText, { fontFamily }, s.amexCVC, !cvc && s.placeholder, focused === "cvc" && s.focused]}>
                 {!cvc ? placeholder.cvc : cvc}
               </Text>}
-          </ImageBackground>
-          <ImageBackground style={[BASE_SIZE, transform]}
+          </FastImage>
+          <FastImage style={[BASE_SIZE, transform]}
             source={imageBack}>
             <Text style={[s.baseText, s.cvc, !cvc && s.placeholder, focused === "cvc" && s.focused]}>
               {!cvc ? placeholder.cvc : cvc}
             </Text>
-          </ImageBackground>
+          </FastImage>
         </FlipCard>
       </View>
     );
